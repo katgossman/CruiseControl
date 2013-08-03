@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using CruiseControl.Enums;
 
 namespace CruiseControl
 {
@@ -40,6 +41,29 @@ namespace CruiseControl
                 }
 
                 isFirstRound = false;
+            }
+
+            int haveInstantRepair = -1;
+            int haveExtraCounterMeasure = -1;
+            int powerUpIndex = 0;
+            foreach (PowerUpType powerUp in _currentBoard.MyPowerUps)
+            {
+                switch (powerUp)
+                {
+                    case PowerUpType.ClusterMissle:
+
+                        break;
+                    case PowerUpType.InstantRepair:
+                        haveInstantRepair = powerUpIndex;
+                        break;
+                    case PowerUpType.BoostRadar:
+
+                        break;
+                    case PowerUpType.ExtraCounterMeasures:
+                        haveExtraCounterMeasure = powerUpIndex;
+                        break;
+                }
+                powerUpIndex++;
             }
 
 
@@ -83,18 +107,35 @@ namespace CruiseControl
                     int damagedSection = -1;
                     for(int i = 0; i < vessel.DamagedSections.Count; i++)
                     { if(vessel.DamagedSections[i]) damagedSection = i; }
-                    if(damagedSection != -1) 
-                        cmds.Add(new Command { vesselid = vessel.Id, action = "repair", coordinate = vessel.Location[damagedSection]});
+                    if (damagedSection != -1)
+                    {
+                        if (haveInstantRepair > -1)
+                        {
+                            cmds.Add(new Command { vesselid = vessel.Id, action = "power_up:" + haveInstantRepair.ToString(), coordinate = vessel.Location[damagedSection] });
+                        }
+                        else
+                        {
+                            cmds.Add(new Command { vesselid = vessel.Id, action = "repair", coordinate = vessel.Location[damagedSection] });
+                        }
+                    }
+                        
                 }
             }
             
             foreach(VesselStatus vessel in _currentBoard.MyVesselStatuses)
             {
-                if(!vessel.CounterMeasuresLoaded)
-                    cmds.Add(new Command { vesselid = vessel.Id, action = "load_countermeasures"});
+                if (!vessel.CounterMeasuresLoaded)
+                {
+                    if (haveExtraCounterMeasure > -1)
+                    {
+                        cmds.Add(new Command { vesselid = vessel.Id, action = "power_up:" + haveExtraCounterMeasure.ToString() });
+                    }
+                    else
+                    {
+                        cmds.Add(new Command { vesselid = vessel.Id, action = "load_countermeasures" });
+                    }
+                }
             }
-            
-
 
             // Add Commands Here.
             // You can only give as many commands as you have un-sunk vessels. Powerup commands do not count against this number. 
