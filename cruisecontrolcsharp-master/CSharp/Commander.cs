@@ -106,13 +106,11 @@ namespace CruiseControl
 
 
             //TEST CODE
-            //foreach (VesselStatus vessel in _currentBoard.MyVesselStatuses)
-            //{
-            //    if (vessel.MovesUntilRepair == -1)
-            //    {
-            //        cmds.Add(new Command { vesselid = vessel.Id, action = "move:south" });
-            //    }
-            //}
+            foreach (VesselStatus vessel in _currentBoard.MyVesselStatuses)
+            {
+                cmds.Add(new Command { vesselid = vessel.Id, action = "move:south" });
+                
+            }
 
 
 
