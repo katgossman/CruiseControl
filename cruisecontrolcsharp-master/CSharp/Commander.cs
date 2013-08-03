@@ -45,13 +45,14 @@ namespace CruiseControl
 
             int haveInstantRepair = -1;
             int haveExtraCounterMeasure = -1;
+            int haveClusterMissle = -1;
             int powerUpIndex = 0;
             foreach (PowerUpType powerUp in _currentBoard.MyPowerUps)
             {
                 switch (powerUp)
                 {
                     case PowerUpType.ClusterMissle:
-
+                        haveClusterMissle = powerUpIndex;
                         break;
                     case PowerUpType.InstantRepair:
                         haveInstantRepair = powerUpIndex;
@@ -78,7 +79,7 @@ namespace CruiseControl
                     if(section.Y < minY) minY = section.Y;
                     if(section.Y > maxY) maxY = section.Y;
                 }
-                string direction = "";
+                string direction = "south";
                 if(minX < _currentBoard.BoardMinCoordinate.X + 2)
                     direction = "east";
                 if(minY < _currentBoard.BoardMinCoordinate.Y + 2)
