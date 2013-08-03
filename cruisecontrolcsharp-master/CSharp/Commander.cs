@@ -117,7 +117,7 @@ namespace CruiseControl
 
             foreach(VesselStatus vessel in _currentBoard.MyVesselStatuses)
             {
-                if (vessel.MovesUntilRepair == -1)
+                if (vessel.MovesUntilRepair < 1)
                 {
 
                     //Move if close to edge
