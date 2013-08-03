@@ -15,3 +15,12 @@ C:\Code\Play\CSharp\CSharp\bin\Newtonsoft.Json.dll
 C:\Code\Play\CSharp\CSharp\bin\Newtonsoft.Json.xml
 C:\Code\Play\CSharp\CSharp\obj\Debug\CruiseControl.dll
 C:\Code\Play\CSharp\CSharp\obj\Debug\CruiseControl.pdb
+C:\Users\Kat.Gossman\Documents\GitHub\CruiseControl\cruisecontrolcsharp-master\CSharp\bin\CruiseControl.dll
+C:\Users\Kat.Gossman\Documents\GitHub\CruiseControl\cruisecontrolcsharp-master\CSharp\bin\CruiseControl.pdb
+C:\Users\Kat.Gossman\Documents\GitHub\CruiseControl\cruisecontrolcsharp-master\CSharp\bin\Nancy.dll
+C:\Users\Kat.Gossman\Documents\GitHub\CruiseControl\cruisecontrolcsharp-master\CSharp\bin\Nancy.Hosting.Aspnet.dll
+C:\Users\Kat.Gossman\Documents\GitHub\CruiseControl\cruisecontrolcsharp-master\CSharp\bin\Newtonsoft.Json.dll
+C:\Users\Kat.Gossman\Documents\GitHub\CruiseControl\cruisecontrolcsharp-master\CSharp\bin\Newtonsoft.Json.xml
+C:\Users\Kat.Gossman\Documents\GitHub\CruiseControl\cruisecontrolcsharp-master\CSharp\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Kat.Gossman\Documents\GitHub\CruiseControl\cruisecontrolcsharp-master\CSharp\obj\Debug\CruiseControl.dll
+C:\Users\Kat.Gossman\Documents\GitHub\CruiseControl\cruisecontrolcsharp-master\CSharp\obj\Debug\CruiseControl.pdb
