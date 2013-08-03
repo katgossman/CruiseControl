@@ -63,6 +63,18 @@ namespace CruiseControl
             }
 
 
+            //TEST CODE
+            foreach (VesselStatus vessel in _currentBoard.MyVesselStatuses)
+            {
+                if (vessel.MovesUntilRepair == -1)
+                {
+                    cmds.Add(new Command { vesselid = vessel.Id, action = "move:south" });
+                }
+            }
+
+
+
+
             foreach(VesselStatus vessel in _currentBoard.MyVesselStatuses)
             {
                 if (vessel.MovesUntilRepair == -1)
@@ -80,11 +92,11 @@ namespace CruiseControl
 
                     string direction = "";
 
-                    bool virtical = false;
-                    if (minX == maxX) virtical = true;
+                    bool vertical = false;
+                    if (minX == maxX) vertical = true;
                     if (vessel.Health < vessel.MaxHealth)
                     {
-                        if (virtical) direction = "east";
+                        if (vertical) direction = "east";
                         else direction = "south";
                     }
 
