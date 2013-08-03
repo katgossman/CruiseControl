@@ -62,15 +62,56 @@ namespace CruiseControl
                 powerUpIndex++;
             }
 
-
-            //TEST CODE
-            foreach (VesselStatus vessel in _currentBoard.MyVesselStatuses)
+            if (haveClusterMissle > -1)
             {
-                if (vessel.MovesUntilRepair == -1)
+                int minX, maxX, minY, maxY;
+                minX = _currentBoard.BoardMinCoordinate.X;
+                maxX = _currentBoard.BoardMaxCoordinate.X;
+                minY = _currentBoard.BoardMinCoordinate.Y;
+                maxY = _currentBoard.BoardMaxCoordinate.Y;
+                for(int i = 0; i <= lowerRight.X; i++)
                 {
-                    cmds.Add(new Command { vesselid = vessel.Id, action = "move:south" });
+                    for(int j = 0; j <= lowerRight.Y; j++)
+                    {
+                        boardVisual[i][j] = "NO";
+                    }
+                }
+                foreach (VesselStatus vessel in _currentBoard.MyVesselStatuses)
+                {
+                    foreach (Coordinate section in vessel.Location)
+                    {
+                        boardVisual[section.X - 1][section.Y - 1] = "NO";
+                        boardVisual[section.X - 1][section.Y] = "NO";
+                        boardVisual[section.X - 1][section.Y + 1] = "NO";
+                        boardVisual[section.X][section.Y - 1] = "NO";
+                        boardVisual[section.X][section.Y] = "NO";
+                        boardVisual[section.X][section.Y + 1] = "NO";
+                        boardVisual[section.X + 1][section.Y - 1] = "NO";
+                        boardVisual[section.X + 1][section.Y] = "NO";
+                        boardVisual[section.X + 1][section.Y + 1] = "NO";
+                    }
+                }
+                for (int i = 0; i <= lowerRight.X; i++)
+                {
+                    for (int j = 0; j <= lowerRight.Y; j++)
+                    {
+                        if (!string.Equals(boardVisual[i][j], "NO"))
+                        {
+                            cmds.Add(new Command { vesselid = _currentBoard.MyVesselStatuses[0].Id, action = "power_up:" + haveClusterMissle.ToString(), coordinate = new Coordinate { X = i, Y = j } });
+                        }
+                    }
                 }
             }
+
+
+            //TEST CODE
+            //foreach (VesselStatus vessel in _currentBoard.MyVesselStatuses)
+            //{
+            //    if (vessel.MovesUntilRepair == -1)
+            //    {
+            //        cmds.Add(new Command { vesselid = vessel.Id, action = "move:south" });
+            //    }
+            //}
 
 
 
