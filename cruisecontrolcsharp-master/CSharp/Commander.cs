@@ -35,11 +35,6 @@ namespace CruiseControl
                 }
                 lowerRight = new Coordinate {X = _currentBoard.BoardMaxCoordinate.X, Y = _currentBoard.BoardMaxCoordinate.Y};
 
-                foreach(VesselStatus vessel in _currentBoard.MyVesselStatuses)
-                {
-                    cmds.Add(new Command { vesselid = vessel.Id, action = "load_countermeasures"});
-                }
-
                 isFirstRound = false;
             }
 
@@ -70,56 +65,71 @@ namespace CruiseControl
 
             foreach(VesselStatus vessel in _currentBoard.MyVesselStatuses)
             {
-                //Move if close to edge
-                int minX = lowerRight.X, minY = lowerRight.Y, maxX = 0, maxY = 0;
-                foreach(Coordinate section in vessel.Location)
+                if (vessel.MovesUntilRepair == -1)
                 {
-                    if(section.X < minX) minX = section.X;
-                    if(section.X > maxX) maxX = section.X;
-                    if(section.Y < minY) minY = section.Y;
-                    if(section.Y > maxY) maxY = section.Y;
-                }
-                string direction = "south";
-                if(minX < _currentBoard.BoardMinCoordinate.X + 2)
-                    direction = "east";
-                if(minY < _currentBoard.BoardMinCoordinate.Y + 2)
-                    direction = "south";
-                if(maxX > _currentBoard.BoardMaxCoordinate.X - 2)
-                    direction = "west";
-                if(maxY > _currentBoard.BoardMaxCoordinate.Y - 2)
-                    direction = "north";
-                if(minX < _currentBoard.BoardMinCoordinate.X + 1)
-                    direction = "east";
-                if(minY < _currentBoard.BoardMinCoordinate.Y + 1)
-                    direction = "south";
-                if(maxX > _currentBoard.BoardMaxCoordinate.X - 1)
-                    direction = "west";
-                if(maxY > _currentBoard.BoardMaxCoordinate.Y - 1)
-                    direction = "north";
-                if(!string.IsNullOrEmpty(direction))
-                {
-                    string command = "move:" + direction;
-                    cmds.Add(new Command { vesselid = vessel.Id, action = command});
-                }
 
-                //Repair if needed
-                if(vessel.Health < (vessel.MaxHealth - 19) && vessel.AllowRepair)
-                {
-                    int damagedSection = -1;
-                    for(int i = 0; i < vessel.DamagedSections.Count; i++)
-                    { if(vessel.DamagedSections[i]) damagedSection = i; }
-                    if (damagedSection != -1)
+                    //Move if close to edge
+                    int minX = lowerRight.X, minY = lowerRight.Y, maxX = 0, maxY = 0;
+                    foreach (Coordinate section in vessel.Location)
                     {
-                        if (haveInstantRepair > -1)
-                        {
-                            cmds.Add(new Command { vesselid = vessel.Id, action = "power_up:" + haveInstantRepair.ToString(), coordinate = vessel.Location[damagedSection] });
-                        }
-                        else
-                        {
-                            cmds.Add(new Command { vesselid = vessel.Id, action = "repair", coordinate = vessel.Location[damagedSection] });
-                        }
+                        if (section.X < minX) minX = section.X;
+                        if (section.X > maxX) maxX = section.X;
+                        if (section.Y < minY) minY = section.Y;
+                        if (section.Y > maxY) maxY = section.Y;
                     }
-                        
+
+                    string direction = "";
+
+                    bool virtical = false;
+                    if (minX == maxX) virtical = true;
+                    if (vessel.Health < vessel.MaxHealth)
+                    {
+                        if (virtical) direction = "east";
+                        else direction = "south";
+                    }
+
+                    if (minX < _currentBoard.BoardMinCoordinate.X + 2)
+                        direction = "east";
+                    if (minY < _currentBoard.BoardMinCoordinate.Y + 2)
+                        direction = "south";
+                    if (maxX > _currentBoard.BoardMaxCoordinate.X - 2)
+                        direction = "west";
+                    if (maxY > _currentBoard.BoardMaxCoordinate.Y - 2)
+                        direction = "north";
+                    if (minX < _currentBoard.BoardMinCoordinate.X + 1)
+                        direction = "east";
+                    if (minY < _currentBoard.BoardMinCoordinate.Y + 1)
+                        direction = "south";
+                    if (maxX > _currentBoard.BoardMaxCoordinate.X - 1)
+                        direction = "west";
+                    if (maxY > _currentBoard.BoardMaxCoordinate.Y - 1)
+                        direction = "north";
+                    if (!string.IsNullOrEmpty(direction))
+                    {
+                        string command = "move:" + direction;
+                        cmds.Add(new Command { vesselid = vessel.Id, action = command });
+                    }
+
+                    //Repair if needed
+                    if (vessel.Health < (vessel.MaxHealth - 19) && vessel.AllowRepair)
+                    {
+                        int damagedSection = -1;
+                        for (int i = 0; i < vessel.DamagedSections.Count; i++)
+                        { if (vessel.DamagedSections[i]) damagedSection = i; }
+                        if (damagedSection != -1)
+                        {
+                            if (haveInstantRepair > -1)
+                            {
+                                cmds.Add(new Command { vesselid = vessel.Id, action = "power_up:" + haveInstantRepair.ToString(), coordinate = vessel.Location[damagedSection] });
+                            }
+                            else
+                            {
+                                cmds.Add(new Command { vesselid = vessel.Id, action = "repair", coordinate = vessel.Location[damagedSection] });
+                            }
+                        }
+
+                    }
+
                 }
             }
             
