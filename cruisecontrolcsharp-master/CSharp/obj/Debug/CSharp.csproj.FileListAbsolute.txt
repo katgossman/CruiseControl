@@ -1,0 +1,17 @@
+C:\Users\Mike.Reyes\Desktop\CSharp\CSharp\bin\Nancy.dll
+C:\Users\Mike.Reyes\Desktop\CSharp\CSharp\bin\Nancy.Hosting.Aspnet.dll
+C:\Users\Mike.Reyes\Desktop\CSharp\CSharp\obj\Debug\CSharp.csprojResolveAssemblyReference.cache
+C:\Users\Mike.Reyes\Desktop\CSharp\CSharp\bin\CruiseControl.dll
+C:\Users\Mike.Reyes\Desktop\CSharp\CSharp\bin\CruiseControl.pdb
+C:\Users\Mike.Reyes\Desktop\CSharp\CSharp\bin\Newtonsoft.Json.dll
+C:\Users\Mike.Reyes\Desktop\CSharp\CSharp\bin\Newtonsoft.Json.xml
+C:\Users\Mike.Reyes\Desktop\CSharp\CSharp\obj\Debug\CruiseControl.dll
+C:\Users\Mike.Reyes\Desktop\CSharp\CSharp\obj\Debug\CruiseControl.pdb
+C:\Code\Play\CSharp\CSharp\bin\CruiseControl.dll
+C:\Code\Play\CSharp\CSharp\bin\CruiseControl.pdb
+C:\Code\Play\CSharp\CSharp\bin\Nancy.dll
+C:\Code\Play\CSharp\CSharp\bin\Nancy.Hosting.Aspnet.dll
+C:\Code\Play\CSharp\CSharp\bin\Newtonsoft.Json.dll
+C:\Code\Play\CSharp\CSharp\bin\Newtonsoft.Json.xml
+C:\Code\Play\CSharp\CSharp\obj\Debug\CruiseControl.dll
+C:\Code\Play\CSharp\CSharp\obj\Debug\CruiseControl.pdb
