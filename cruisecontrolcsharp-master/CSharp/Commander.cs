@@ -17,6 +17,7 @@ namespace CruiseControl
         public Commander()
         {
             _currentBoard = new BoardStatus();
+            lowerRight = new Coordinate();
         }
 
         // Do not alter/remove this method signature
@@ -118,8 +119,8 @@ namespace CruiseControl
 
             foreach(VesselStatus vessel in _currentBoard.MyVesselStatuses)
             {
-                if (vessel.MovesUntilRepair == -1)
-                {
+                //if (vessel.MovesUntilRepair == -1)
+                //{
 
                     //Move if close to edge
                     int minX = lowerRight.X, minY = lowerRight.Y, maxX = 0, maxY = 0;
@@ -183,7 +184,7 @@ namespace CruiseControl
 
                     }
 
-                }
+                //}
             }
             
             foreach(VesselStatus vessel in _currentBoard.MyVesselStatuses)
